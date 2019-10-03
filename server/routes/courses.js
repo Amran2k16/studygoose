@@ -9,6 +9,10 @@ function convertToSlug(Text) {
     .replace(/ +/g, "-");
 }
 
+function convertToEmbed(Text) {
+  return Text.toLowerCase().replace("watch?v=", "embed/");
+}
+
 // @@@ api/courses
 router.get("/", (req, res) =>
   Course.find()
@@ -34,7 +38,7 @@ router.get("/all-videos", (req, res) => {
     .then(videos => res.json(videos));
 });
 
-// @@@ api/courses/id
+// @@@ api/courses/coursename
 router.get("/:coursename", (req, res) => {
   Video.find({ course_name: req.params.coursename })
     .sort({ title: 1 })
@@ -45,12 +49,24 @@ router.post("/:coursename", (req, res) => {
   const newVideo = new Video({
     title: req.body.title,
     description: req.body.description,
-    video_url: req.body.video_url,
+    video_url: convertToEmbed(req.body.video_url),
     course_name: req.params.coursename,
     slug: convertToSlug(req.body.title)
   });
 
   newVideo.save().then(videos => res.json(videos));
+});
+
+// get info for one specific video
+// // @@@ api/courses/coursename/videoname
+router.get("/:coursename/:videoname", (req, res) => {
+  // res.send(req.params.coursename + req.params.videoname);
+  Video.find({
+    course_name: req.params.coursename,
+    slug: req.params.videoname
+  })
+    .sort({ title: 1 })
+    .then(videos => res.json(videos));
 });
 
 module.exports = router;
