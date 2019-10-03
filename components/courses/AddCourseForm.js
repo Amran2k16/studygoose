@@ -18,9 +18,9 @@ export default function AddCourseForm() {
           description: description
         })
       });
-      console.log("submitted the form!");
+      alert("Successfully created Video");
     } else {
-      console.log("Inputs cannot be empty!");
+      alert("Inputs cannot be empty!");
     }
   };
   return (

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function AddCourseForm() {
+  const router = useRouter();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [videourl, setVideourl] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (title !== "" && description !== "") {
-      fetch("/api/courses/", {
+    if (
+      title !== "" &&
+      description !== "" &&
+      videourl !== "" &&
+      router.query.coursename !== ""
+    ) {
+      fetch("/api/courses/" + router.query.coursename, {
         method: "post",
         headers: {
           Accept: "application/json, text/plain, */*",
@@ -15,19 +24,22 @@ export default function AddCourseForm() {
         },
         body: JSON.stringify({
           title: title,
-          description: description
+          description: description,
+          video_url: videourl,
+          coursename: router.query.coursename
         })
       });
-      console.log("submitted the form!");
+      alert("Successfully created Video");
     } else {
-      console.log("Inputs cannot be empty!");
+      alert("Inputs cannot be empty!");
     }
   };
   return (
     <div>
+      <p>Add a new video to the {router.query.coursename} course! </p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Course Title</label>
+          <label>Video Title</label>
           <input
             name="title"
             type="text"
@@ -38,7 +50,7 @@ export default function AddCourseForm() {
           />
         </div>
         <div className="form-group">
-          <label>Course Description</label>
+          <label>Video Description</label>
           <input
             name="description"
             type="text"
@@ -48,6 +60,28 @@ export default function AddCourseForm() {
             onChange={e => setDescription(e.target.value)}
           />
         </div>
+        <div className="form-group">
+          <label>Video url</label>
+          <input
+            name="video_url"
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput"
+            value={videourl}
+            onChange={e => setVideourl(e.target.value)}
+          />
+        </div>
+        {/* <div className="form-group">
+          <label>Course name</label>
+          <input
+            disabled={true}
+            name="course_name"
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput"
+            value={router.query.coursename}
+          />
+        </div> */}
         <input type="submit" value="Submit" />
       </form>
     </div>
