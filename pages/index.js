@@ -10,6 +10,7 @@ export default function Blog() {
       >
         <h1 className="">Page Under Maintenance</h1>
         {/* test */}
+        {/* test 2 */}
       </div>
     </Layout>
   );
