@@ -9,6 +9,7 @@ export default function Blog() {
         style={{ height: "100vh" }}
       >
         <h1 className="">Page Under Maintenance</h1>
+        {/* test */}
       </div>
     </Layout>
   );
