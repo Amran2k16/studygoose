@@ -9,20 +9,20 @@ export default function VideoCard(props) {
   console.log(router.asPath + props.videoTitle);
 
   return (
-    <div className="col-xl-3 col-lg-4 col-md-12 col-sm-12">
-      <div style={{ cursor: "pointer", paddingBottom: "20px" }}>
-        <Link
-          href="/courses/[coursename]/[videoname]"
-          as={`/courses/${router.query.coursename}/${props.slug}`}
-        >
+    <Link
+      href="/courses/[coursename]/[videoname]"
+      as={`/courses/${router.query.coursename}/${props.slug}`}
+    >
+      <div className="col-xl-3 col-lg-4 col-md-12 col-sm-12">
+        <div style={{ cursor: "pointer", paddingBottom: "20px" }}>
           <div className="card">
             <div className="card-body">
               <div style={{ height: "150px" }}>{props.videoTitle}</div>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function CourseCard(props) {
+export default function AddCourseCard() {
   const router = useRouter();
 
   return (
@@ -15,9 +15,16 @@ export default function CourseCard(props) {
                 className="row justify-content-center align-items-center"
                 style={{ height: "150px" }}
               >
-                <i className="material-icons" style={{ fontSize: "58px" }}>
-                  add
-                </i>
+                <div className="col-4">
+                  <div className="row">
+                    <i className="material-icons" style={{ fontSize: "58px" }}>
+                      add
+                    </i>
+                  </div>
+                  <div className="row">
+                    <p>Add a new course</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

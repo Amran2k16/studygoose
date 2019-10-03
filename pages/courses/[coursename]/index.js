@@ -5,6 +5,7 @@ import Link from "next/link";
 import CourseCard from "../../../components/courses/CourseCard";
 import VideoCard from "../../../components/courses/VideoCard";
 import fetch from "isomorphic-unfetch";
+import AddVideoCard from "../../../components/courses/AddVideoCard";
 
 course.getInitialProps = async function(context) {
   const { coursename } = context.query;
@@ -37,9 +38,7 @@ export default function course(props) {
           <h4 style={{ cursor: "pointer" }}>Available Courses</h4>
         </Link>
         <h4 className="pl-3 pr-3"> > </h4>
-        <Link href={router.asPath}>
-          <h4 style={{ cursor: "pointer" }}>{router.query.coursename}</h4>
-        </Link>
+        <h4 style={{ cursor: "pointer" }}>{router.query.coursename}</h4>
       </div>
       <div className="row">
         {props.videos.map(video => (
@@ -49,6 +48,7 @@ export default function course(props) {
             slug={video.slug}
           />
         ))}
+        <AddVideoCard />
       </div>
     </Layout>
   );
