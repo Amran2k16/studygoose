@@ -28,8 +28,8 @@ const Layout = props => (
     <style jsx>
       {`
         .my-sidebar {
-          -ms-flex: 0 0 330px;
-          flex: 0 0 330px;
+          -ms-flex: 0 0 400px;
+          flex: 0 0 400px;
         }
         .content-background {
           background-color: #f8f8f8;
