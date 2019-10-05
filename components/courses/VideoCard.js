@@ -6,7 +6,6 @@ export default function VideoCard(props) {
   const router = useRouter();
   //   console.log(router.asPath + props.videoTitle);
   //   console.log(router.asPath + props.videoTitle);
-  console.log(router.asPath + props.videoTitle);
 
   return (
     <Link

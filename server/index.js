@@ -2,7 +2,12 @@ const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
 const passport = require("passport");
-require("../config/passport")(passport);
+const session = require("express-session");
+// 1 - importing dependencies
+const Auth0Strategy = require("passport-auth0");
+const uid = require("uid-safe");
+
+// require("../config/passport")(passport);
 
 mongoose.connect("mongodb://localhost:27017/studygoose", {
   useNewUrlParser: true
@@ -22,6 +27,14 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+
+  server.use(
+    session({
+      secret: "secret",
+      resave: false,
+      saveUninitialized: true
+    })
+  );
 
   server.use(passport.initialize());
   server.use(passport.session());

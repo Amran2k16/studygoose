@@ -3,15 +3,20 @@ import { useRouter } from "next/router";
 import Layout from "../../../components/MyLayout";
 import CourseCard from "../../../components/courses/CourseCard";
 import fetch from "isomorphic-unfetch";
+import Quizzes from "../../../components/Quizzes";
 
 video.getInitialProps = async function(context) {
   const { coursename, videoname } = context.query;
-  const res = await fetch(
+  const videoResponse = await fetch(
     `http://localhost:3000/api/courses/${coursename}/${videoname}`
   );
+  const QuizResponse = await fetch(
+    `http://localhost:3000/api/courses/${coursename}/${videoname}/quiz`
+  );
 
-  const video = await res.json();
-  return { video: video[0] };
+  const VideoInformation = await videoResponse.json();
+  const QuizInformation = await QuizResponse.json();
+  return { video: VideoInformation[0], quiz: QuizInformation };
 };
 
 export default function video(props) {
@@ -29,6 +34,21 @@ export default function video(props) {
           ></iframe>
           <h4>{props.video.title}</h4>
           <p>{props.video.description}</p>
+          <div className="col-12">
+            {props.quiz.map(quiz => {
+              // console.log(quiz.question)
+              return (
+                <Quizzes
+                  key={quiz._id}
+                  question={quiz.question}
+                  option1={quiz.option1}
+                  option2={quiz.option2}
+                  option3={quiz.option3}
+                  option4={quiz.option4}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </Layout>

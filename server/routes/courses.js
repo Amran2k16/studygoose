@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Course = require("../models/Course");
 const Video = require("../models/Video");
-
+const Quiz = require("../models/Quiz");
 function convertToSlug(Text) {
   return Text.toLowerCase()
     .replace(/[^\w ]+/g, "")
@@ -45,6 +45,7 @@ router.get("/:coursename", (req, res) => {
     .then(videos => res.json(videos));
 });
 
+// Add one new video
 router.post("/:coursename", (req, res) => {
   const newVideo = new Video({
     title: req.body.title,
@@ -55,6 +56,36 @@ router.post("/:coursename", (req, res) => {
   });
 
   newVideo.save().then(videos => res.json(videos));
+});
+
+router.get("/:coursename/:videoname/quiz", (req, res) => {
+  Quiz.find({
+    course_title: req.params.coursename,
+    video_title: req.params.videoname
+  })
+    .then(quizzes => res.json(quizzes))
+    .catch(err => console.log(err));
+});
+
+router.post("/:coursename/:videoname/quiz", (req, res) => {
+  const newQuiz = new Quiz({
+    course_title: req.params.coursename,
+    video_title: req.params.videoname,
+    question: req.body.question,
+    option1: req.body.option1,
+    option2: req.body.option2,
+    option3: req.body.option3,
+    option4: req.body.option4,
+    correct: req.body.correct
+  });
+
+  newQuiz
+    .save()
+    .then(quiz => {
+      res.json(quiz);
+      console.log("Successfully added a new quiz");
+    })
+    .catch(err => console.log(err));
 });
 
 // get info for one specific video
