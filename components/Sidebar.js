@@ -6,7 +6,7 @@ const buttonInformation = [
   { icon: "ondemand_video", text: "Courses", url: "courses" },
   { icon: "menu_book", text: "Quizzes", url: "quizzes" },
   { icon: "message", text: "Messages", url: "messages" },
-  { icon: "exit_to_app", text: "Log Out", url: "logout" }
+  { icon: "exit_to_app", text: "Log Out", url: "login" }
 ];
 
 const Sidebar = () => {

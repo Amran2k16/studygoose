@@ -9,20 +9,25 @@ export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    fetch("/users/login", {
+    const data = { username, password };
+
+    const response = await fetch("/users/login", {
       method: "post",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
+      body: JSON.stringify(data)
     });
+    const reply = await response.json();
+    console.log(reply);
+    if (reply.status == "success") {
+      console.log("redirecting person");
+      Router.push("/");
+    }
   };
 
   return (

@@ -50,20 +50,26 @@ router.post("/register", (req, res) => {
 //   console.log(failureRedirect);
 // });
 
-router.get("/login", (req, res) => {
+router.post("/login", (req, res) => {
   if (req.body.username !== "" && req.body.password !== "") {
-    User.find({ username: req.body.username }).then(user => {
-      if (bcrypt.compareSync(req.body.password, user[0].password)) {
-        // Logged in!
-        console.log("You logged in!");
-        console.log(user);
-        return res.redirect("/");
-      } else {
-        console.log("Password is wrong!");
-      }
-    });
+    User.find({ username: req.body.username })
+      .then(user => {
+        if (bcrypt.compareSync(req.body.password, user[0].password)) {
+          // Logged in!
+          console.log("You logged in!");
+          // res.json(res.sendStatus(200));
+          res.json({ status: "success" });
+        } else {
+          console.log("Password is wrong!");
+          res.json({ status: "Wrong password" });
+        }
+      })
+      .catch(err => {
+        console.log("Username does not exist!");
+      });
   } else {
     console.log("Username or password was empty");
+    res.json({ status: "Username or password was empty" });
   }
 });
 
