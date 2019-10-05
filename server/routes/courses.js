@@ -82,8 +82,7 @@ router.post("/:coursename/:videoname/quiz", (req, res) => {
   newQuiz
     .save()
     .then(quiz => {
-      res.json(quiz);
-      console.log("Successfully added a new quiz");
+      res.json({ status: "success", quiz: quiz });
     })
     .catch(err => console.log(err));
 });

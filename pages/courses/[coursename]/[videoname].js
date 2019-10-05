@@ -4,6 +4,7 @@ import Layout from "../../../components/MyLayout";
 import CourseCard from "../../../components/courses/CourseCard";
 import fetch from "isomorphic-unfetch";
 import Quizzes from "../../../components/Quizzes";
+import AddQuiz from "../../../components/AddQuiz";
 
 video.getInitialProps = async function(context) {
   const { coursename, videoname } = context.query;
@@ -16,7 +17,12 @@ video.getInitialProps = async function(context) {
 
   const VideoInformation = await videoResponse.json();
   const QuizInformation = await QuizResponse.json();
-  return { video: VideoInformation[0], quiz: QuizInformation };
+  return {
+    video: VideoInformation[0],
+    quiz: QuizInformation,
+    coursename,
+    videoname
+  };
 };
 
 export default function video(props) {
@@ -49,6 +55,10 @@ export default function video(props) {
               );
             })}
           </div>
+          <AddQuiz
+            coursetitle={props.coursename}
+            videotitle={props.videoname}
+          />
         </div>
       </div>
     </Layout>
