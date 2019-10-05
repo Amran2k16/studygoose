@@ -15,8 +15,8 @@ course.getInitialProps = async function(context) {
 };
 
 export default function course(props) {
+  const admin = false;
   const router = useRouter();
-  console.log(props.show);
 
   return (
     <Layout>
@@ -48,7 +48,7 @@ export default function course(props) {
             slug={video.slug}
           />
         ))}
-        <AddVideoCard />
+        {admin ? <AddVideoCard /> : null}
       </div>
     </Layout>
   );

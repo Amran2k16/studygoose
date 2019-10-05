@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
+import Router from "next/router";
+
+LoginForm.getInitialProps = async function() {};
+
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    // if (username !== "" && password !== "") {
-    //   fetch("/api/courses/", {
-    //     method: "post",
-    //     headers: {
-    //       Accept: "application/json, text/plain, */*",
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: description
-    //     })
-    //   });
-    //   alert("Successfully created Video");
-    // } else {
-    //   alert("Inputs cannot be empty!");
-    // }
-    console.log("Form has been submitted");
+
+    fetch("/users/login", {
+      method: "post",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    });
   };
+
   return (
     <div className="col-12">
       <form onSubmit={handleSubmit}>

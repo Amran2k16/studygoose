@@ -5,6 +5,7 @@ import AddCourseCard from "../components/courses/AddCourseCard";
 import fetch from "isomorphic-unfetch";
 
 const courses = props => {
+  const admin = false;
   return (
     <Layout>
       <div className="row justify-content-center">
@@ -33,7 +34,7 @@ const courses = props => {
         {props.courses.map(course => (
           <CourseCard key={course._id} url={course.slug} title={course.title} />
         ))}
-        <AddCourseCard />
+        {admin ? <AddCourseCard /> : null}
       </div>
     </Layout>
   );

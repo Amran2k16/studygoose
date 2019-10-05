@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
+
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -7,26 +9,26 @@ export default function RegisterForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // if (title !== "" && description !== "") {
-    //   fetch("/api/courses/", {
-    //     method: "post",
-    //     headers: {
-    //       Accept: "application/json, text/plain, */*",
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: description
-    //     })
-    //   });
-    //   alert("Successfully created Video");
-    // } else {
-    //   alert("Inputs cannot be empty!");
-    // }
-    console.log("Form submitted");
+    if (username !== "" && password !== "") {
+      fetch("/users/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email
+        })
+      });
+      alert("Successfully created Video");
+    } else {
+      alert("Inputs cannot be empty!");
+    }
   };
   return (
-    <div>
+    <div className="col-12">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>

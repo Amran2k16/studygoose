@@ -1,6 +1,8 @@
 const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
+const passport = require("passport");
+require("../config/passport")(passport);
 
 mongoose.connect("mongodb://localhost:27017/studygoose", {
   useNewUrlParser: true
@@ -21,9 +23,14 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
+  server.use(passport.initialize());
+  server.use(passport.session());
+
   server.use(express.json());
   const courses = require("./routes/courses");
   server.use("/api/courses", courses);
+  const users = require("./routes/users");
+  server.use("/users", users);
 
   server.all("*", (req, res) => {
     return handle(req, res);
