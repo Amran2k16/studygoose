@@ -31,6 +31,13 @@ const Quiz = props => {
       }
     } else {
       console.log("You need to select an answer");
+      setmessagestyle("red");
+      setmessage(
+        "Oops. You forgot to select an answer. Please select from one below"
+      );
+      window.setTimeout(() => {
+        setmessage("");
+      }, 1000);
     }
   };
 
@@ -46,7 +53,7 @@ const Quiz = props => {
         disabled={submitted}
         className={`col-12 btn mb-2 ${
           selected == "1" ? "btn-primary" : "btn-secondary"
-        }`}
+        } `}
       >
         {props.option1}
       </button>
@@ -59,7 +66,7 @@ const Quiz = props => {
         disabled={submitted}
         className={`col-12 btn mb-2 ${
           selected == "2" ? "btn-primary" : "btn-secondary"
-        }`}
+        } `}
       >
         {props.option2}
       </button>
@@ -72,7 +79,7 @@ const Quiz = props => {
         disabled={submitted}
         className={`col-12 btn mb-2 ${
           selected == "3" ? "btn-primary" : "btn-secondary"
-        }`}
+        } `}
       >
         {props.option3}
       </button>
@@ -85,18 +92,44 @@ const Quiz = props => {
         disabled={submitted}
         className={`col-12 btn mb-2 ${
           selected == "4" ? "btn-primary" : "btn-secondary"
-        }`}
+        } `}
       >
         {props.option4}
       </button>
 
-      <button disabled={submitted} onClick={onSubmit}>
-        Submit
+      <button className="btn btn-info" disabled={submitted} onClick={onSubmit}>
+        Check Answer
       </button>
-      {submitted ? <button className="float-right">Next</button> : null}
+      {/* {submitted ? <button className="float-right">Next</button> : null} */}
     </div>
   );
 };
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "black"
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "black" }}
+      onClick={onClick}
+    />
+  );
+}
 
 class QuizHolder extends Component {
   constructor(props) {
@@ -106,20 +139,30 @@ class QuizHolder extends Component {
       finished: false,
       score: 0
     };
+
+    // this.next = this.next.bind(this);
+    // this.previous = this.next.bind(this);
   }
 
-  settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+  // next = () => {
+  //   console.log("Clicked on handler");
+  // };
 
   render() {
+    const settings = {
+      dots: true,
+      infinite: false,
+      speed: 200,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      draggable: false,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
+    };
+
     return (
       <div className="container">
-        <Slider {...this.settings}>
+        <Slider ref={c => (this.slider = c)} {...settings}>
           {this.props.quiz.map(quiz => {
             // console.log(quiz.question)
             console.log(quiz);
@@ -136,23 +179,13 @@ class QuizHolder extends Component {
             );
           })}
         </Slider>
+
+        {/* <button className={"col-12"} onClick={this.next}>
+          Test
+        </button> */}
       </div>
     );
   }
 }
 
-// Get initial props not working
-// Quizzes.getInitialProps = async function(context) {
-//   console.log(
-//     `http://localhost:3000/api/courses/${coursename}/${videoname}/quiz`
-//   );
-//   const { coursename, videoname } = context.query;
-//   const res = await fetch(
-//     `http://localhost:3000/api/courses/${coursename}/${videoname}/quiz`
-//   );
-
-//   const allQuizzes = res.json();
-
-//   return allQuizzes;
-// };
 export default QuizHolder;

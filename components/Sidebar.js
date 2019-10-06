@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 
 const buttonInformation = [
   { icon: "home", text: "Home", url: "" },
-  { icon: "ondemand_video", text: "Courses", url: "courses" },
-  { icon: "menu_book", text: "Quizzes", url: "quizzes" },
-  { icon: "message", text: "Messages", url: "messages" },
-  { icon: "exit_to_app", text: "Log Out", url: "login" }
+  { icon: "ondemand_video", text: "Courses", url: "courses" }
+  // { icon: "menu_book", text: "Quizzes", url: "quizzes" },
+  // { icon: "message", text: "Messages", url: "messages" },
+  // { icon: "exit_to_app", text: "Log Out", url: "login" }
 ];
 
 const Sidebar = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../../../components/MyLayout";
 import CourseCard from "../../../components/courses/CourseCard";
@@ -28,7 +28,10 @@ video.getInitialProps = async function(context) {
 };
 
 export default function video(props) {
-  const router = useRouter();
+  // const router = useRouter();
+
+  const [show, setshow] = useState(false);
+
   // <p>{router.query.videoname}</p>
   return (
     <Layout>
@@ -45,10 +48,15 @@ export default function video(props) {
           <div className="col-12">
             <QuizHolder quiz={props.quiz} />
           </div>
-          <AddQuiz
-            coursetitle={props.coursename}
-            videotitle={props.videoname}
-          />
+          <div>
+            <button onClick={e => setshow(!show)}>Add new quiz</button>
+            {show ? (
+              <AddQuiz
+                coursetitle={props.coursename}
+                videotitle={props.videoname}
+              />
+            ) : null}
+          </div>
         </div>
       </div>
     </Layout>
