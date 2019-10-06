@@ -1,28 +1,95 @@
 import React, { Component, useState } from "react";
 
-const Option = props => {
+const Quiz = props => {
+  const [selected, setselected] = useState("0");
+  const [submitted, setsubmitted] = useState(false);
+
+  const onSubmit = e => {
+    if (
+      selected == "1" ||
+      selected == "2" ||
+      selected == "3" ||
+      selected == "4"
+    ) {
+      if (selected == props.correctAnswer) {
+        setsubmitted(true);
+        console.log("correct answer was selected. Move to the next question");
+        // Make that selected component green
+      } else {
+        console.log("That was the wrong answer. Try another one");
+        // Make that selected component red
+      }
+    } else {
+      console.log("You need to select an answer");
+    }
+  };
+
   return (
-    <button
-      onClick={e => this.setState({ selected: e.target.value })}
-      type="button"
-      disabled={this.state.submitted}
-      value={this.props.number}
-      className={`col-12 btn mb-2 ${
-        this.state.selected == this.props.number
-          ? "btn-primary"
-          : "btn-secondary"
-      }`}
-    >
-      {this.props.text}
-    </button>
+    <div>
+      <h4>{props.question}</h4>
+
+      <button
+        onClick={e => {
+          setselected("1");
+        }}
+        type="button"
+        disabled={submitted}
+        className={`col-12 btn mb-2 ${
+          selected == "1" ? "btn-primary" : "btn-secondary"
+        }`}
+      >
+        {props.option1}
+      </button>
+
+      <button
+        onClick={e => {
+          setselected("2");
+        }}
+        type="button"
+        disabled={submitted}
+        className={`col-12 btn mb-2 ${
+          selected == "2" ? "btn-primary" : "btn-secondary"
+        }`}
+      >
+        {props.option2}
+      </button>
+
+      <button
+        onClick={e => {
+          setselected("3");
+        }}
+        type="button"
+        disabled={submitted}
+        className={`col-12 btn mb-2 ${
+          selected == "3" ? "btn-primary" : "btn-secondary"
+        }`}
+      >
+        {props.option3}
+      </button>
+
+      <button
+        onClick={e => {
+          setselected("4");
+        }}
+        type="button"
+        disabled={submitted}
+        className={`col-12 btn mb-2 ${
+          selected == "4" ? "btn-primary" : "btn-secondary"
+        }`}
+      >
+        {props.option4}
+      </button>
+      <button disabled={submitted} onClick={onSubmit}>
+        Submit
+      </button>
+      {submitted ? <button className="float-right">Next</button> : null}
+    </div>
   );
 };
 
-class Quiz extends Component {
+class QuizHolder extends Component {
   constructor(props) {
     super(props);
-
-    console.log(this.props);
 
     this.state = {
       selected: "0",
@@ -31,44 +98,16 @@ class Quiz extends Component {
     };
   }
 
-  onSubmit = e => {
-    if (
-      this.state.selected == "1" ||
-      this.state.selected == "2" ||
-      this.state.selected == "3" ||
-      this.state.selected == "4"
-    ) {
-      setSubmitted(true);
-      if (this.state.selected == correct) {
-        console.log("correct answer was selected");
-        // Make that selected component green
-      } else {
-        console.log("That was the wrong answer");
-        // Make that selected component red
-      }
-    } else {
-      console.log("You need to select an answer");
-    }
-  };
-
   render() {
     return (
       <div className="row">
-        <div className="col-12">
-          <h4>{this.props.question}</h4>
-          <div className="row p-1">
-            <Option number="1" text={this.props.option1} />
-            <Option number="2" text={this.props.option2} />
-            <Option number="3" text={this.props.option3} />
-            <Option number="4" text={this.props.option4} />
-            <button disabled={this.state.submitted} onClick={this.onSubmit}>
-              Submit
-            </button>
-            {this.state.submitted ? (
-              <button className="float-right">Next</button>
-            ) : null}
-          </div>
-        </div>
+        <Quiz 
+        question="This is the question" 
+        option1="First one" 
+        option2="second one" 
+        option3="third one" 
+        option4="fourth one" 
+        correctAnswer="4" />
       </div>
     );
   }
@@ -88,4 +127,4 @@ class Quiz extends Component {
 
 //   return allQuizzes;
 // };
-export default Quiz;
+export default QuizHolder;
