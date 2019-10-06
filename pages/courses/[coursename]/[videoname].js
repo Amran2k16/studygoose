@@ -33,7 +33,7 @@ export default function video(props) {
   return (
     <Layout>
       <div className="row justify-content-center">
-        <div className="col-10">
+        <div className="col-12">
           <iframe
             width="100%"
             height="500"
@@ -42,7 +42,7 @@ export default function video(props) {
           ></iframe>
           <h4>{props.video.title}</h4>
           <p>{props.video.description}</p>
-          <div className="col-10">
+          <div className="col-12">
             <QuizHolder quiz={props.quiz} />
           </div>
           <AddQuiz

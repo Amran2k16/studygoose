@@ -28,7 +28,7 @@ const Layout = props => (
 
     <div className="container-fluid">
       <div className="row fill">
-        <div className="col my-sidebar">
+        <div className=" my-sidebar">
           <Sidebar />
         </div>
         <div className="col content-background">

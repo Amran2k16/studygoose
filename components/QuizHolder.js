@@ -4,6 +4,8 @@ import Slider from "react-slick";
 const Quiz = props => {
   const [selected, setselected] = useState("0");
   const [submitted, setsubmitted] = useState(false);
+  const [message, setmessage] = useState("");
+  const [messageStyle, setmessagestyle] = useState("");
 
   const onSubmit = e => {
     if (
@@ -16,9 +18,16 @@ const Quiz = props => {
         setsubmitted(true);
         console.log("correct answer was selected. Move to the next question");
         // Make that selected component green
+        setmessage("correct answer was selected. Move to the next question");
+        setmessagestyle("green");
       } else {
         console.log("That was the wrong answer. Try another one");
         // Make that selected component red
+        setmessagestyle("red");
+        setmessage("That was the wrong answer. Try another one");
+        window.setTimeout(() => {
+          setmessage("");
+        }, 1000);
       }
     } else {
       console.log("You need to select an answer");
@@ -28,7 +37,7 @@ const Quiz = props => {
   return (
     <div className="col-12">
       <h4>{props.question}</h4>
-
+      <p style={{ color: messageStyle }}> {message}</p>
       <button
         onClick={e => {
           setselected("1");
@@ -80,6 +89,7 @@ const Quiz = props => {
       >
         {props.option4}
       </button>
+
       <button disabled={submitted} onClick={onSubmit}>
         Submit
       </button>
