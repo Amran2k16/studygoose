@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Layout from "../../../components/MyLayout";
 import CourseCard from "../../../components/courses/CourseCard";
 import fetch from "isomorphic-unfetch";
-import Quizzes from "../../../components/Quizzes";
+import Quiz from "../../../components/Quiz";
 import AddQuiz from "../../../components/AddQuiz";
 
 video.getInitialProps = async function(context) {
@@ -44,13 +44,14 @@ export default function video(props) {
             {props.quiz.map(quiz => {
               // console.log(quiz.question)
               return (
-                <Quizzes
+                <Quiz
                   key={quiz._id}
                   question={quiz.question}
                   option1={quiz.option1}
                   option2={quiz.option2}
                   option3={quiz.option3}
                   option4={quiz.option4}
+                  correct={quiz.correct}
                 />
               );
             })}

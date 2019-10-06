@@ -1,10 +1,22 @@
 import React, { Component } from "react";
 
-const Quizzes = props => {
+const Quiz = props => {
+  const handleChange = e => {
+    console.log(e.target.value);
+    if (e.target.value == props.correct) {
+      console.log("Correct answer");
+      console.log(e);
+      e.target.className = "text-success";
+    } else {
+      console.log("Wrong answer");
+      e.target.className = "text-danger";
+    }
+  };
   return (
     <div className="row">
       <h4>{props.question}</h4>
-      <select>
+      <select onChange={handleChange}>
+        <option value="0">Select Answer</option>
         <option value="1">{props.option1}</option>
         <option value="2">{props.option2}</option>
         <option value="3">{props.option3}</option>
@@ -28,4 +40,4 @@ const Quizzes = props => {
 
 //   return allQuizzes;
 // };
-export default Quizzes;
+export default Quiz;
