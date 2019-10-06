@@ -15,7 +15,7 @@ course.getInitialProps = async function(context) {
 };
 
 export default function course(props) {
-  const admin = false;
+  const admin = true;
   const router = useRouter();
 
   return (

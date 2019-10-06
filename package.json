@@ -27,6 +27,8 @@
     "react-dom": "^16.10.1",
     "react-markdown": "^4.2.2",
     "react-quiz-component": "^0.3.2",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1",
     "uid-safe": "^2.1.5"
   }
 }

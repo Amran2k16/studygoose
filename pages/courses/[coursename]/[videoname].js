@@ -42,22 +42,7 @@ export default function video(props) {
           ></iframe>
           <h4>{props.video.title}</h4>
           <p>{props.video.description}</p>
-          <div className="col-12">
-            {/* {props.quiz.map(quiz => {
-              // console.log(quiz.question)
-              return (
-                <Quiz
-                  key={quiz._id}
-                  question={quiz.question}
-                  option1={quiz.option1}
-                  option2={quiz.option2}
-                  option3={quiz.option3}
-                  option4={quiz.option4}
-                  correct={quiz.correct}
-                />
-              );
-            })} */}
-            {console.log(props.quiz)}
+          <div className="col-10">
             <QuizHolder quiz={props.quiz} />
           </div>
           <AddQuiz

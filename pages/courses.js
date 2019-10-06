@@ -5,7 +5,7 @@ import AddCourseCard from "../components/courses/AddCourseCard";
 import fetch from "isomorphic-unfetch";
 
 const courses = props => {
-  const admin = false;
+  const admin = true;
   return (
     <Layout>
       <div className="row justify-content-center">

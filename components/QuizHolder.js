@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import Slider from "react-slick";
 
 const Quiz = props => {
   const [selected, setselected] = useState("0");
@@ -97,34 +98,34 @@ class QuizHolder extends Component {
     };
   }
 
+  settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   render() {
     return (
-      <div className="row">
-        {this.props.quiz.map(quiz => {
-          // console.log(quiz.question)
-          console.log(quiz);
-          return (
-            <Quiz
-              key={quiz._id}
-              question={quiz.question}
-              option1={quiz.option1}
-              option2={quiz.option2}
-              option3={quiz.option3}
-              option4={quiz.option4}
-              correctAnswer={quiz.correct}
-            />
-          );
-        })}
-
-        {/* <Quiz 
-        key={quiz._id}
-        question="This is the question" 
-        option1="First one" 
-        option2="second one" 
-        option3="third one" 
-        option4="fourth one" 
-        correctAnswer="4" />
-        */}
+      <div className="container">
+        <Slider {...this.settings}>
+          {this.props.quiz.map(quiz => {
+            // console.log(quiz.question)
+            console.log(quiz);
+            return (
+              <Quiz
+                key={quiz._id}
+                question={quiz.question}
+                option1={quiz.option1}
+                option2={quiz.option2}
+                option3={quiz.option3}
+                option4={quiz.option4}
+                correctAnswer={quiz.correct}
+              />
+            );
+          })}
+        </Slider>
       </div>
     );
   }
