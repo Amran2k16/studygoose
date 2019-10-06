@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import Layout from "../../../components/MyLayout";
 import CourseCard from "../../../components/courses/CourseCard";
 import fetch from "isomorphic-unfetch";
-import Quiz from "../../../components/Quiz";
+// import Quiz from "../../../components/Quiz";
+import QuizHolder from "../../../components/QuizHolder";
+
 import AddQuiz from "../../../components/AddQuiz";
 
 video.getInitialProps = async function(context) {
@@ -41,7 +43,7 @@ export default function video(props) {
           <h4>{props.video.title}</h4>
           <p>{props.video.description}</p>
           <div className="col-12">
-            {props.quiz.map(quiz => {
+            {/* {props.quiz.map(quiz => {
               // console.log(quiz.question)
               return (
                 <Quiz
@@ -54,7 +56,9 @@ export default function video(props) {
                   correct={quiz.correct}
                 />
               );
-            })}
+            })} */}
+            {console.log(props.quiz)}
+            <QuizHolder quiz={props.quiz} />
           </div>
           <AddQuiz
             coursetitle={props.coursename}

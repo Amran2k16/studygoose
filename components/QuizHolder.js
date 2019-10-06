@@ -25,7 +25,7 @@ const Quiz = props => {
   };
 
   return (
-    <div>
+    <div className="col-12">
       <h4>{props.question}</h4>
 
       <button
@@ -92,8 +92,7 @@ class QuizHolder extends Component {
     super(props);
 
     this.state = {
-      selected: "0",
-      submitted: false,
+      finished: false,
       score: 0
     };
   }
@@ -101,13 +100,31 @@ class QuizHolder extends Component {
   render() {
     return (
       <div className="row">
-        <Quiz 
+        {this.props.quiz.map(quiz => {
+          // console.log(quiz.question)
+          console.log(quiz);
+          return (
+            <Quiz
+              key={quiz._id}
+              question={quiz.question}
+              option1={quiz.option1}
+              option2={quiz.option2}
+              option3={quiz.option3}
+              option4={quiz.option4}
+              correctAnswer={quiz.correct}
+            />
+          );
+        })}
+
+        {/* <Quiz 
+        key={quiz._id}
         question="This is the question" 
         option1="First one" 
         option2="second one" 
         option3="third one" 
         option4="fourth one" 
         correctAnswer="4" />
+        */}
       </div>
     );
   }
