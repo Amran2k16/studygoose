@@ -1,27 +1,51 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+
+const Options = props => {
+  const [active, setactive] = useState("0");
+  console.log(active);
+
+  const buttonClicked = e => {
+    setactive(e.target.value);
+  };
+
+  const submit = e => {
+    // if state is one of 1,2,3 or 4... then allow this otherwise send "you need to pick one!"
+    console.log("submitted");
+  };
+
+  const Button = props => {
+    return (
+      <button
+        onClick={buttonClicked}
+        type="button"
+        value={props.number}
+        className={`col-12 btn mb-2 ${
+          active == props.number ? "btn-primary" : "btn-secondary"
+        }`}
+      >
+        {props.text}
+      </button>
+    );
+  };
+
+  return (
+    <div className="row p-1">
+      <Button number="1" text="First option" />
+      <Button number="2" text="Second option" />
+      <Button number="3" text="Third option" />
+      <Button number="4" text="Fourth option" />
+      <button onClick={submit}>Submit</button>
+    </div>
+  );
+};
 
 const Quiz = props => {
-  const handleChange = e => {
-    console.log(e.target.value);
-    if (e.target.value == props.correct) {
-      console.log("Correct answer");
-      console.log(e);
-      e.target.className = "text-success";
-    } else {
-      console.log("Wrong answer");
-      e.target.className = "text-danger";
-    }
-  };
   return (
     <div className="row">
-      <h4>{props.question}</h4>
-      <select onChange={handleChange}>
-        <option value="0">Select Answer</option>
-        <option value="1">{props.option1}</option>
-        <option value="2">{props.option2}</option>
-        <option value="3">{props.option3}</option>
-        <option value="4">{props.option4}</option>
-      </select>
+      <div className="col-12">
+        <h4>What is a print statement?</h4>
+        <Options />
+      </div>
     </div>
   );
 };
