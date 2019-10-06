@@ -2,9 +2,18 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const CourseSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  slug: String
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  slug: {
+    type: String,
+    required: true
+  }
   // videos: [ObjectId]
 });
 

@@ -8,17 +8,19 @@ const Auth0Strategy = require("passport-auth0");
 const uid = require("uid-safe");
 
 // require("../config/passport")(passport);
+const db = require("../config/keys_dev").mongoURI;
 
-mongoose.connect("mongodb://localhost:27017/studygoose", {
-  useNewUrlParser: true
-});
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB connected. Testing again...."))
+  .catch(err => console.log(err));
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
-  // we're connected!
-  console.log("We are connected");
-});
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error:"));
+// db.once("open", function() {
+//   // we're connected!
+//   console.log("We are connected");
+// });
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
