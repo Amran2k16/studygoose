@@ -9,7 +9,9 @@ import AddVideoCard from "../../../components/courses/AddVideoCard";
 
 course.getInitialProps = async function(context) {
   const { coursename } = context.query;
-  const res = await fetch(`http://localhost:3000/api/courses/${coursename}`);
+  const res = await fetch(
+    `https://studygoose-api.herokuapp.com/api/courses/${coursename}`
+  );
   const videos = await res.json();
   return { videos: videos };
 };

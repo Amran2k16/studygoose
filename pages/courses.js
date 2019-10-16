@@ -32,7 +32,13 @@ const courses = props => {
       </div>
       <div className="row justify-content-start">
         {props.courses.map(course => (
-          <CourseCard key={course._id} url={course.slug} title={course.title} />
+          <CourseCard
+            key={course._id}
+            color={course.color}
+            url={course.slug}
+            title={course.title}
+            description={course.description}
+          />
         ))}
         {admin ? <AddCourseCard /> : null}
       </div>
@@ -41,22 +47,14 @@ const courses = props => {
 };
 
 courses.getInitialProps = async function() {
-  const res = await fetch("http://localhost:3000/api/courses/");
+  // const res = await fetch("https://studygoose-api.herokuapp.com/api/courses/");
+  const res = await fetch("http://localhost:4000/api/courses/");
+
   const data = await res.json();
 
   return {
     courses: data
   };
 };
-
-// <CourseCard key={show.id} url={show.id} title={show.name} />
-// courses.getInitialProps = async function() {
-//   const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
-//   const data = await res.json();
-
-//   return {
-//     shows: data.map(item => item.show)
-//   };
-// };
 
 export default courses;

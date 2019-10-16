@@ -11,10 +11,10 @@ import AddQuiz from "../../../components/AddQuiz";
 video.getInitialProps = async function(context) {
   const { coursename, videoname } = context.query;
   const videoResponse = await fetch(
-    `http://localhost:3000/api/courses/${coursename}/${videoname}`
+    `https://studygoose-api.herokuapp.com/api/courses/${coursename}/${videoname}`
   );
   const QuizResponse = await fetch(
-    `http://localhost:3000/api/courses/${coursename}/${videoname}/quiz`
+    `https://studygoose-api.herokuapp.com/api/courses/${coursename}/${videoname}/quiz`
   );
 
   const VideoInformation = await videoResponse.json();

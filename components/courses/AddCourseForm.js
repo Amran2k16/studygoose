@@ -7,7 +7,7 @@ export default function AddCourseForm() {
   const handleSubmit = e => {
     e.preventDefault();
     if (title !== "" && description !== "") {
-      fetch("/api/courses/", {
+      fetch("http://localhost:4000/api/courses/", {
         method: "post",
         headers: {
           Accept: "application/json, text/plain, */*",
